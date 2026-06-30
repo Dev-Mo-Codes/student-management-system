@@ -1,17 +1,21 @@
-# Student Management System
+Student Management System
 
-A Python-based student management system developed as part of my software engineering learning journey.
+A simple command-line application written in Python.
 
-## Features
+Features
 
 - Add Student
 - Remove Student
 - Search Student
-- Update Student
-- Store data in JSON
+- Show All Students
+- JSON Persistence
 
-## Tech Stack
+Technoligies
 
-- Python
-- Git
-- GitHub
+-Python
+-Json
+-Git
+
+Author
+
+Mohammad Valian

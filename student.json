@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Ali Alavi",
+        "age": 18,
+        "student_id": 1000
+    },
+    {
+        "name": "Azade Asadi",
+        "age": 21,
+        "student_id": 202
+    },
+    {
+        "name": "Hasan Nade Ali",
+        "age": 25,
+        "student_id": 1002
+    },
+    {
+        "name": "Asal Saravi",
+        "age": 20,
+        "student_id": 21
+    }
+]
