@@ -1,1 +1,12 @@
-[]
+[
+    {
+        "name": "Ali Azami",
+        "age": 25,
+        "student_id": 103
+    },
+    {
+        "name": "Sara Ajami",
+        "age": 20,
+        "student_id": 100
+    }
+]
