@@ -18,12 +18,14 @@ def add_student(student):
     students.append(student)
 
 
-def get_student_paramethers():
+def get_student_parameters():
     print("Add Student \n")
     name = input("What's Student's full name: ")
     name = name.strip().title()
-    age = get_valid_int("What's studen's age: ")
-    student_id = get_valid_student_id("What's Student's ID: ")
+    age = input("What's studen's age: ")
+    age = get_valid_int(age)
+    student_id = input("What's Student's ID: ")
+    student_id = get_valid_student_id(student_id)
     student = {
         "name": name,
         "age": age,
@@ -51,7 +53,7 @@ def remove_student(student_temp_id):
     return False
 
 
-def search_student(student_temp_id):
+def search_student_by_id(student_temp_id):
     for student in students:
         if student_temp_id == student["student_id"]:
             print("Here is the student's information")
@@ -60,7 +62,18 @@ def search_student(student_temp_id):
     return False
 
 
+def search_student_by_name(student_temp_name):
+    student_temp_name = student_temp_name.strip().title()
+    for student in students:
+        if student_temp_name == student["name"]:
+            print("Here is the student's information")
+            display_student(student)
+            return True
+    return False
+
+
 def update_student(student_temp_id):
+    student_temp_id = get_valid_int(student_temp_id)
     for student in students:
         if student_temp_id == student["student_id"]:
             print("Here is the student's information")
@@ -71,33 +84,23 @@ def update_student(student_temp_id):
                 updated_student_name = student["name"]
             print("Age:", student["age"])
             updated_student_age = input("New age(leave blank to keep) ")
-            if not updated_student_age:
+            if updated_student_age:
+                updated_student_age = get_valid_int(updated_student_age)
+            else:
                 updated_student_age = student["age"]
-            else:
-                while True:
-                    try:
-                        updated_student_age = int(updated_student_age)
-                        break
-                    except ValueError:
-                        print("That wasn't a number. ")
-                        updated_student_age = input("New age ")
             print("Student ID:", student["student_id"])
-            updated_student_ID = input("New ID(leave blank to keep) ")
-            if not updated_student_ID:
-                updated_student_ID = student["student_id"]
+            updated_student_id = input("New ID(leave blank to keep) ")
+            if updated_student_id:
+                updated_student_id = get_valid_student_id(updated_student_id)
             else:
-                while True:
-                    try:
-                        updated_student_ID = int(updated_student_age)
-                        break
-                    except ValueError:
-                        updated_student_ID = input("New ID ")
+                updated_student_id = student["student_id"]
             student["name"] = updated_student_name
             student["age"] = updated_student_age
-            student["student_id"] = updated_student_ID
-            
+            student["student_id"] = updated_student_id
+
             save_students()
-            break
+            return True
+    return False
 
 
 def show_all_students():
@@ -113,10 +116,11 @@ def show_all_students():
 def get_valid_int(input_data):
     while True:
         try:
-            output = int(input(input_data))
+            output = int(input_data)
             return output
         except ValueError:
             print("That wasn't a number. ")
+            input_data = input("please enter a valid number")
 
 
 def get_valid_student_id(input_data):
@@ -124,7 +128,8 @@ def get_valid_student_id(input_data):
     for student in students:
         if student_temp_id == student["student_id"]:
             print("ID is already taken please choose another ID")
-            get_valid_student_id("What's Student's ID: ")
+            student_temp_id = input("What's Student's ID: ")
+            student_temp_id = get_valid_student_id(student_temp_id)
             break
     return student_temp_id
 
@@ -139,33 +144,66 @@ while True:
     print("4. Show All Students")
     print("5. Update Student")
     print("6. Exit")
+    print("------------------------------")
 
     choice = input("Select an option: ")
 
     if choice == "1":
-        get_student_paramethers()
+        get_student_parameters()
         save_students()
     elif choice == "2":
         print("Remove Student")
+        print("------------------------------")
         if not students:
             print("List is empty")
-        student_temp_id = int(input("Please enter Student ID "))
+            print("------------------------------")
+        student_temp_id = input("Please enter Student ID ")
+        student_temp_id = get_valid_int(student_temp_id)
         check_status = remove_student(student_temp_id)
         save_students()
         if not check_status:
             print("Student not Found")
+            print("------------------------------")
+        else:
+            print("Student Removed")
+            print("------------------------------")
     elif choice == "3":
-        print("Search student")
-        student_temp_id = int(input("Please enter Student ID "))
-        print("Searching for student ..... ")
-        check_status = search_student(student_temp_id)
-        if not check_status:
-            print("Student Not Found")
+        print("\n===== Search Student =====")
+        print("1. Search Student By Name")
+        print("2. Search Student By ID")
+        print("------------------------------")
+        choice = input("Select an option: ")
+
+        if choice == "1":
+            student_temp_name = input("Please enter Student name: ")
+            student_temp_name = student_temp_name.strip().title()
+            print("Searching for student By name ..... ")
+            check_status = search_student_by_name(student_temp_name)
+            if not check_status:
+                print("Student Not Found")
+                print("------------------------------")
+            else:
+                print("------------------------------")
+        elif choice == "2":
+            student_temp_id = input("Please enter Student ID: ")
+            student_temp_id = get_valid_int(student_temp_id)
+            print("Searching for student By ID ..... ")
+            check_status = search_student_by_id(student_temp_id)
+            if not check_status:
+                print("Student Not Found")
+                print("------------------------------")
+            else:
+                print("------------------------------")
     elif choice == "4":
         show_all_students()
     elif choice == "5":
-        student_temp_id = int(input("Please enter Student ID to update: "))
-        update_student(student_temp_id)
+        student_temp_id = input("Please enter Student ID to update: ")
+        if update_student(student_temp_id):
+            print("Student has been updated")
+            print("------------------------------")
+        else:
+            print("Student doesn't exist")
+            print("------------------------------")
     elif choice == "6":
         print("Goodbye!")
         break
