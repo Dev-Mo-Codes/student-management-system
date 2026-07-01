@@ -17,6 +17,13 @@ This project is part of my journey to becoming a Backend Software Engineer. It f
 - ✅ JSON data persistence
 - ✅ Input validation
 - ✅ Duplicate Student ID prevention
+- ✅ Sort students by Name
+- ✅ Sort students by Age
+- ✅ Sort students by Student ID
+- ✅ Show total number of students
+- ✅ Display average student age
+- ✅ Display youngest and oldest student
+- ✅ Delete all students
 
 ---
 
@@ -80,13 +87,6 @@ While building this project I practiced:
 
 ## 🔄 Future Improvements
 
-- [ ] Sort students by Name
-- [ ] Sort students by Age
-- [ ] Sort students by Student ID
-- [ ] Show total number of students
-- [ ] Display average student age
-- [ ] Display youngest and oldest student
-- [ ] Delete all students
 - [ ] Export data to CSV
 - [ ] Replace JSON with SQLite
 - [ ] Object-Oriented Programming (OOP) refactor
