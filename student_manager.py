@@ -7,7 +7,7 @@ class StudentManager:
     def __init__(self):
         self.students = []
 
-    def load_studentss(self):
+    def load_students(self):
         try:
             with open("student.json", "r") as file:
                 data = json.load(file)
@@ -49,7 +49,7 @@ class StudentManager:
                         "do you confirm?  (Y for Yes N for No) "
                     ).strip().upper()
                 )
-                if confirmation.upper() == "Y":
+                if confirmation == "Y":
                     print("Student no longer on the list")
                     self.students.remove(student)
                     self.save_students()
@@ -133,8 +133,9 @@ class StudentManager:
         self.students.sort(key=lambda student: student.age, reverse=reverse)
         self.save_students()
 
-    def sort_students_by_id(self, rev):
-        self.students.sort(key=lambda student: student.student_id, reverse=rev)
+    def sort_students_by_id(self, reverse):
+        self.students.sort(key=lambda student: student.student_id,
+                           reverse=reverse)
         self.save_students()
 
     def select_sort_type(self):
@@ -193,5 +194,5 @@ class StudentManager:
         if not self.students:
             print("List is empty")
         for student in self.students:
-            Student.display_student(student)
+            Student.display_student()
             print("-----------------------------")

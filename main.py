@@ -1,7 +1,7 @@
 from student_manager import StudentManager
 
 manager = StudentManager()
-manager.load_studentss()
+manager.load_students()
 
 while True:
     print("\n===== Student Management System =====")
@@ -20,18 +20,16 @@ while True:
 
     if choice == "1":
         manager.get_student_parameters()
-        manager.save_students()
     elif choice == "2":
         print("Remove Student")
         print("------------------------------")
-        if not manager.students:
+        if manager.total_student_number() == 0:
             print("List is empty")
             print("------------------------------")
         student_temp_id = input("Please enter Student ID ")
         student_temp_id = manager.get_valid_int(student_temp_id)
-        check_status = manager.remove_student(student_temp_id)
-        manager.save_students()
-        if not check_status:
+        removed = manager.remove_student(student_temp_id)
+        if not removed:
             print("Student not Found")
             print("------------------------------")
         else:
@@ -48,27 +46,27 @@ while True:
             student_temp_name = input("Please enter Student name: ")
             student_temp_name = student_temp_name.strip().title()
             print("Searching for student By name ..... ")
-            check_status = (
+            student = (
                 manager.search_student_by_name(student_temp_name)
             )
-            if not check_status:
+            if not student:
                 print("Student Not Found")
                 print("------------------------------")
             else:
-                check_status.display_student()
+                student.display_student()
                 print("------------------------------")
         elif choice == "2":
             student_temp_id = input("Please enter Student ID: ")
             student_temp_id = manager.get_valid_int(student_temp_id)
             print("Searching for student By ID ..... ")
-            check_status = (
+            student = (
                 manager.search_student_by_id(student_temp_id)
             )
-            if not check_status:
+            if not student:
                 print("Student Not Found")
                 print("------------------------------")
             else:
-                check_status.display_student()
+                student.display_student()
                 print("------------------------------")
     elif choice == "4":
         student_temp_id = input("Please enter Student ID to update: ")
